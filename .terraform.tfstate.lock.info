@@ -1,0 +1,9 @@
+{
+  "ID": "b59a8f8a-b1d4-d985-67be-4417285793ac",
+  "Operation": "OperationTypeInvalid",
+  "Info": "",
+  "Who": "cr_kushal@cr-kushal",
+  "Version": "0.13.5",
+  "Created": "2021-01-01T15:47:05.826805796Z",
+  "Path": "terraform.tfstate"
+}
