@@ -131,24 +131,15 @@ variable "ebs_device_name" {
   type    = string
 }
 
-variable "volume_type" {
-  default = ""
-  type    = string
-}
-
-variable "volume_size" {
-  default = ""
-  type    = string
-}
 
 
 variable "root_block_device_size" {
-  default = ""
   type    = string
+  default = "50" # This needs to be stirng not 50.
 }
 
 variable "root_block_device_type" {
-  default = ""
+  default = "gp2"
   type    = string
 }
 
@@ -159,6 +150,53 @@ variable "autoscaling_group_name" {
 }
 
 
-variable "subnets" {
+variable "subnets_ids" {
   type = any
+}
+
+
+# New added.
+
+variable "default_cooldown_period" {
+  type    = number
+  default = 300
+}
+
+
+
+variable "asg_key" {
+  type    = string
+  default = "foo"
+}
+
+
+variable "asg_value" {
+  type    = string
+  default = "bar"
+}
+
+
+variable "propagate_at_launch" {
+  type    = bool
+  default = true
+}
+
+
+
+variable "create_before_destroy" {
+  type    = bool
+  default = true
+}
+
+
+
+variable "ebs_volume_size" {
+  type    = string
+  default = "50" # This needs to be stirng not 50.
+}
+
+
+variable "ebs_volume_type" {
+  type    = string
+  default = "gp2"
 }

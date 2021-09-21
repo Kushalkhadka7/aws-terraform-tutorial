@@ -1,3 +1,4 @@
+# Metrics to scale down the auto scaling group.
 resource "aws_autoscaling_policy" "default_scale_down" {
   name                   = var.scale_down_policy_name
   scaling_adjustment     = var.scale_down_scaling_adjustment

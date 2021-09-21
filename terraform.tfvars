@@ -1,5 +1,5 @@
-vpc_cidr        = "192.168.0.0/16"
-vpc_name        = "test_vpc"
+vpc_cidr            = "192.168.0.0/16"
+vpc_name            = "test_vpc"
 private_subnet_cidr = "192.168.1.0/24"
 public_subnet_cidr  = "192.168.2.0/24"
 private_subnet_name = "Private Subnet"
@@ -12,17 +12,21 @@ admin_asg_name            = "admin_asg"
 min_size                  = 1
 health_check_type         = "ELB"
 health_check_grace_period = 300
+default_cooldown_period   = 300
+propagate_at_launch       = true
+create_before_destroy     = true
 
 # launch configurations
 ec2_instance_type      = "t2.micro"
 enable_monitoring      = true
 ebs_optimized          = true
 ebs_device_name        = "/dev/xvd"
-volume_type            = "gp2"
-volume_size            = "50"
+ebs_volume_type        = "gp2"
+ebs_volume_size        = "50"
 delete_on_termination  = true
 root_block_device_size = "50"
 root_block_device_type = "gp2"
+
 
 # Scale down policy.
 scale_down_policy_name        = "scale_down_policy"

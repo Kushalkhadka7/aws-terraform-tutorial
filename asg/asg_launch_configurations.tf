@@ -1,3 +1,4 @@
+# Ec2 instance configuration to be attached in the auto scaling group.
 resource "aws_launch_configuration" "default" {
   image_id          = var.ec2_image_id
   instance_type     = var.ec2_instance_type
@@ -5,20 +6,16 @@ resource "aws_launch_configuration" "default" {
   enable_monitoring = var.enable_monitoring
   ebs_optimized     = var.ebs_optimized
 
-  lifecycle {
-    create_before_destroy = true
-  }
-
   ebs_block_device {
-    device_name           = "/dev/xvdz"
-    volume_type           = "gp2"
-    volume_size           = "50"
-    delete_on_termination = true
+    device_name           = var.ebs_device_name
+    volume_type           = var.ebs_volume_type
+    volume_size           = var.ebs_volume_size
+    delete_on_termination = var.delete_on_termination
   }
 
 
   root_block_device {
-    volume_size = "50"
-    volume_type = "gp2"
+    volume_size = var.root_block_device_size
+    volume_type = var.root_block_device_type
   }
 }

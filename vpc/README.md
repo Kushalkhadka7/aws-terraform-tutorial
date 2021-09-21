@@ -15,6 +15,13 @@ Terraform module which creates Virtual Private Cloud (VPC).
 | ---- | ------- |
 | aws  | >= 2.48 |
 
+| Phase    | Equivalent `Terraform` Command |
+| -------- | ------------------------------ |
+| Planning | `terraform plan`               |
+| Creation | `terraform apply`              |
+| Update   | `terraform apply`              |
+| Deletion | `terraform destroy`            |
+
 ## Inputs
 
 | Name                               | Description                                                  | Type           | Default          | Required |

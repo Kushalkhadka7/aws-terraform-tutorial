@@ -1,3 +1,4 @@
+# Metrics to scale up the auto scaling group.
 resource "aws_autoscaling_policy" "default_scale_up" {
   name                   = var.scale_up_policy_name
   scaling_adjustment     = var.scale_up_scaling_adjustment
