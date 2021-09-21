@@ -1,9 +1,11 @@
-aws_vpc_cidr        = "192.168.0.0/16"
-aws_vpc_name        = "aws_micor_vpc"
+vpc_cidr        = "192.168.0.0/16"
+vpc_name        = "test_vpc"
 private_subnet_cidr = "192.168.1.0/24"
 public_subnet_cidr  = "192.168.2.0/24"
 private_subnet_name = "Private Subnet"
 public_subnet_name  = "Public Subnet"
+private_route_cidr  = "192.168.0.0/16"
+public_route_cidr   = "0.0.0.0/0"
 
 # Auto scaling group
 admin_asg_name            = "admin_asg"

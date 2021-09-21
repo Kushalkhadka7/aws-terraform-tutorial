@@ -1,13 +1,15 @@
-variable "aws_vpc_cidr" {
+# For the creation of VPC.
+variable "vpc_cidr" {
   type    = string
   default = ""
 }
 
-variable "aws_vpc_name" {
+variable "vpc_name" {
   type    = string
   default = ""
 }
 
+# For the creation of private subnet.
 variable "private_subnet_cidr" {
   default = ""
   type    = string
@@ -18,6 +20,7 @@ variable "public_subnet_cidr" {
   type    = string
 }
 
+# For the creation of public subnet.
 variable "private_subnet_name" {
   default = ""
   type    = string
@@ -25,6 +28,24 @@ variable "private_subnet_name" {
 
 variable "public_subnet_name" {
   default = ""
+  type    = string
+}
+
+# # For the creation of subnets.
+variable "aws_availability_zones_available" {
+  default = []
+  type    = list(string)
+}
+
+# For Route tables.
+variable "private_route_cidr" {
+  default = ""
+  type    = string
+}
+
+
+variable "public_route_cidr" {
+  default = "0.0.0.0/0"
   type    = string
 }
 

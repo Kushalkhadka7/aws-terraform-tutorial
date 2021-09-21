@@ -1,3 +1,5 @@
+# Creates private subnet across the no of availability zones.
+# Eg. If the region have 3 AZ, 3 private subnets will be created.
 resource "aws_subnet" "private_subnet" {
   vpc_id                  = aws_vpc.default_vpc.id
   map_public_ip_on_launch = true
@@ -10,6 +12,8 @@ resource "aws_subnet" "private_subnet" {
   }
 }
 
+# Creates public subnet across the no of availability zones.
+# Eg. If the region have 3 AZ, 3 pubilc subnets will be created.
 resource "aws_subnet" "public_subnet" {
   vpc_id                  = aws_vpc.default_vpc.id
   map_public_ip_on_launch = true
@@ -22,6 +26,7 @@ resource "aws_subnet" "public_subnet" {
   }
 }
 
+# Associate route table and subnet (For private subnet).
 resource "aws_route_table_association" "priavet_rt_association" {
   count          = length(var.aws_availability_zones_available)
   subnet_id      = element(aws_subnet.private_subnet.*.id, count.index)
@@ -30,7 +35,7 @@ resource "aws_route_table_association" "priavet_rt_association" {
   depends_on = [aws_route_table.private_rt, aws_subnet.private_subnet]
 }
 
-
+# Associate route table and subnet (For public subnet).
 resource "aws_route_table_association" "public_rt_association" {
   count          = length(var.aws_availability_zones_available)
   subnet_id      = element(aws_subnet.public_subnet.*.id, count.index)

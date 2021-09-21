@@ -18,3 +18,8 @@ output "public_subnet" {
   value       = aws_subnet.public_subnet
   description = "Public subnet credentials"
 }
+
+output "elastic_ip" {
+  value       = aws_eip.elastic_ip
+  description = "Elastic ip associates with the vpc nat gateway."
+}
