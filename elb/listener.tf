@@ -1,7 +1,8 @@
+# Application load balancer listener.
 resource "aws_alb_listener" "alb_listener" {
   load_balancer_arn = aws_alb.application_lb.arn
-  port              = 80
-  protocol          = "Http"
+  port              = var.alb_listener_port
+  protocol          = var.alb_listener_protocol
 
   default_action {
     type = "fixed-response"
@@ -14,7 +15,7 @@ resource "aws_alb_listener" "alb_listener" {
   }
 }
 
-
+# Application load balancer listener rule.
 resource "aws_lb_listener_rule" "admin_rule" {
   listener_arn = aws_alb_listener.alb_listener.arn
 
@@ -30,7 +31,7 @@ resource "aws_lb_listener_rule" "admin_rule" {
 
   condition {
     path_pattern {
-      values = ["/admin/*"]
+      values = var.route_path_pattern
     }
   }
 

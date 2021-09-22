@@ -30,48 +30,48 @@ module "aws_vpc" {
 # }
 
 # # Admin auto-scaling group.
-module "admin_asg" {
-  source                    = "./asg"
-  subnets_ids               = module.aws_vpc.private_subnet.ids
-  asg_name                  = var.admin_asg_name
-  min_size                  = var.min_size
-  max_size                  = length(data.aws_availability_zones.available.names) * 2
-  health_check_type         = var.health_check_type
-  health_check_grace_period = var.health_check_grace_period
-  desired_capacity          = length(data.aws_availability_zones.available.names)
-  default_cooldown_period   = var.default_cooldown_period
-  asg_key                   = var.asg_key
-  asg_value                 = var.asg_value
-  propagate_at_launch       = var.propagate_at_launch
-  create_before_destroy     = var.create_before_destroy
+# module "admin_asg" {
+#   source                    = "./asg"
+#   subnets_ids               = module.aws_vpc.private_subnet.ids
+#   asg_name                  = var.admin_asg_name
+#   min_size                  = var.min_size
+#   max_size                  = length(data.aws_availability_zones.available.names) * 2
+#   health_check_type         = var.health_check_type
+#   health_check_grace_period = var.health_check_grace_period
+#   desired_capacity          = length(data.aws_availability_zones.available.names)
+#   default_cooldown_period   = var.default_cooldown_period
+#   asg_key                   = var.asg_key
+#   asg_value                 = var.asg_value
+#   propagate_at_launch       = var.propagate_at_launch
+#   create_before_destroy     = var.create_before_destroy
 
-  # launch configurations.
-  ec2_image_id           = "ami-04d29b6f966df1537"
-  ec2_instance_type      = var.ec2_instance_type
-  ec2_security_groups    = [aws_security_group.ec2_security_group.id]
-  enable_monitoring      = var.enable_monitoring
-  ebs_optimized          = var.ebs_optimized
-  ebs_device_name        = var.ebs_device_name
-  ebs_volume_type        = var.ebs_volume_type
-  ebs_volume_size        = var.ebs_volume_size
-  delete_on_termination  = var.delete_on_termination
-  root_block_device_size = var.root_block_device_size
-  root_block_device_type = var.root_block_device_type
+#   # launch configurations.
+#   ec2_image_id           = "ami-04d29b6f966df1537"
+#   ec2_instance_type      = var.ec2_instance_type
+#   ec2_security_groups    = [aws_security_group.ec2_security_group.id]
+#   enable_monitoring      = var.enable_monitoring
+#   ebs_optimized          = var.ebs_optimized
+#   ebs_device_name        = var.ebs_device_name
+#   ebs_volume_type        = var.ebs_volume_type
+#   ebs_volume_size        = var.ebs_volume_size
+#   delete_on_termination  = var.delete_on_termination
+#   root_block_device_size = var.root_block_device_size
+#   root_block_device_type = var.root_block_device_type
 
-  # Scale down policy.
-  scale_down_policy_name        = var.scale_down_policy_name
-  scale_down_scaling_adjustment = var.scale_down_scaling_adjustment
-  scale_down_adjustemnt_type    = var.scale_down_adjustemnt_type
-  scale_down_cool_down          = var.scale_down_cool_down
-  scale_down_policy_type        = var.scale_down_policy_type
+#   # Scale down policy.
+#   scale_down_policy_name        = var.scale_down_policy_name
+#   scale_down_scaling_adjustment = var.scale_down_scaling_adjustment
+#   scale_down_adjustemnt_type    = var.scale_down_adjustemnt_type
+#   scale_down_cool_down          = var.scale_down_cool_down
+#   scale_down_policy_type        = var.scale_down_policy_type
 
-  # Scale up policy.
-  scale_up_policy_name        = var.scale_up_policy_name
-  scale_up_scaling_adjustment = var.scale_up_scaling_adjustment
-  scale_up_adjustemnt_type    = var.scale_up_adjustemnt_type
-  scale_up_cool_down          = var.scale_up_cool_down
-  scale_up_policy_type        = var.scale_up_policy_type
-}
+#   # Scale up policy.
+#   scale_up_policy_name        = var.scale_up_policy_name
+#   scale_up_scaling_adjustment = var.scale_up_scaling_adjustment
+#   scale_up_adjustemnt_type    = var.scale_up_adjustemnt_type
+#   scale_up_cool_down          = var.scale_up_cool_down
+#   scale_up_policy_type        = var.scale_up_policy_type
+# }
 
 
 # module "admin_rds" {
@@ -106,19 +106,27 @@ module "admin_asg" {
 #   range_key_type = "S"
 # }
 
-# module "alb" {
-#   source = "./elb"
+module "alb" {
+  source = "./elb"
 
-#   name                        = "Application-Load-Balancer"
-#   internal                    = var.internal
-#   load_balancer_type          = var.load_balancer_type
-#   security_groups             = [aws_security_group.elb_security_group.id]
-#   cross_zone_load_balancing   = var.cross_zone_load_balancing
-#   idle_timeout                = var.idle_timeout
-#   connection_draining         = var.connection_draining
-#   connection_draining_timeout = var.connection_draining_timeout
-#   subnets                     = module.aws_vpc.private_subnet.ids
-# }
+  name                        = "Application-Load-Balancer"
+  internal                    = var.internal
+  load_balancer_type          = var.load_balancer_type
+  security_groups             = [aws_security_group.elb_security_group.id]
+  cross_zone_load_balancing   = var.cross_zone_load_balancing
+  idle_timeout                = var.idle_timeout
+  connection_draining         = var.connection_draining
+  connection_draining_timeout = var.connection_draining_timeout
+  subnets                     = module.aws_vpc.private_subnet.ids
+  enable_http2                = var.enable_http2
+  enable_access_logs          = var.enable_access_logs
+  alb_logs_bucket_name        = var.alb_logs_bucket_name
+  alb_logs_bucket_prefix      = var.alb_logs_bucket_prefix
+  alb_env                     = var.alb_env
+  alb_listener_port           = var.alb_listener_port
+  alb_listener_protocol       = var.alb_listener_protocol
+  route_path_pattern          = var.route_path_pattern
+}
 
 # module "log_bucket" {
 #   source = "./s3"

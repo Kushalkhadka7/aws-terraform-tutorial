@@ -401,6 +401,47 @@ variable "cross_zone_load_balancing" {
   type    = bool
 }
 
+variable "enable_http2" {
+  default = false
+  type    = bool
+}
+
+variable "enable_access_logs" {
+  default = false
+  type    = bool
+}
+
+variable "alb_logs_bucket_name" {
+  default = "load_balancer"
+  type    = string
+}
+
+variable "alb_logs_bucket_prefix" {
+  default = "load_balancer/"
+  type    = string
+}
+
+variable "alb_env" {
+  default = "dev"
+  type    = string
+}
+
+variable "alb_listener_port" {
+  default = 80
+  type    = number
+}
+
+variable "alb_listener_protocol" {
+  default = "Http"
+  type    = string
+}
+
+
+variable "route_path_pattern" {
+  default = ["/admin/*"]
+  type    = list(string)
+}
+
 variable "idle_timeout" {
   default = 400
   type    = number
