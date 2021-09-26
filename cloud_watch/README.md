@@ -1,16 +1,6 @@
-# aws-terraform
+# AWS Vpc End Points
 
-Creates aws resources using terraform modules.
-
-# Resources
-
-- [VPC](#vpc/README.md)
-- [ASG](#asg/README.md)
-- [ALB](#alb/README.md)
-- [CloudWatch](#cloudwatch/README.md)
-- [S#](#s3/README.md)
-- [RDS](#rds/README.md)
-- [DynamoDB](#dynamo/README.md)
+Terraform module which cloud watch logs, events and alarms.
 
 ## Requirements
 
@@ -32,7 +22,13 @@ Creates aws resources using terraform modules.
 | Update   | `terraform apply`              |
 | Deletion | `terraform destroy`            |
 
-**NOTE : `terraform.tfvars` file should be created and the above used variables should be initialized it the file.**
+## Usage
+
+```
+module "cloud_watch_test" {
+  source = "./cloudwatch"
+}
+```
 
 ## Running locally.
 

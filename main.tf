@@ -128,30 +128,30 @@ module "alb" {
   route_path_pattern          = var.route_path_pattern
 }
 
-# module "log_bucket" {
-#   source = "./s3"
+module "log_bucket" {
+  source = "./s3"
 
-#   bucket_name        = "kushal-bucket-example2-bucket"
-#   bucket_acl         = "private"
-#   env                = "ENV"
-#   enabled_versioning = true
-#   policy             = <<EOF
-#   {
-#     "Version": "2008-10-17",
-#     "Statement": [
-#       {
-#         "Sid": "PublicReadForGetBucketObjects",
-#         "Effect": "Allow",
-#         "Principal": {
-#           "AWS": "*"
-#         },
-#         "Action": "s3:GetObject",
-#         "Resource": "arn:aws:s3:::${var.bucket_name}/*"
-#       }
-#     ]
-#   }
-#   EOF
-# }
+  bucket_name        = "kushal-bucket-example2-bucket"
+  bucket_acl         = "private"
+  env                = "ENV"
+  enabled_versioning = true
+  policy             = <<EOF
+  {
+    "Version": "2008-10-17",
+    "Statement": [
+      {
+        "Sid": "PublicReadForGetBucketObjects",
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "*"
+        },
+        "Action": "s3:GetObject",
+        "Resource": "arn:aws:s3:::${var.bucket_name}/*"
+      }
+    ]
+  }
+  EOF
+}
 
 
 
@@ -187,5 +187,4 @@ module "alb" {
 #   vpc_id       = module.aws_vpc.default_vpc.id
 #   service_name = "com.amazonaws.us-east-1.s3"
 #   env          = "PROD"
-
 # }

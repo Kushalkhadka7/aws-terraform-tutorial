@@ -1,16 +1,6 @@
-# aws-terraform
+# AWS Vpc End Points
 
-Creates aws resources using terraform modules.
-
-# Resources
-
-- [VPC](#vpc/README.md)
-- [ASG](#asg/README.md)
-- [ALB](#alb/README.md)
-- [CloudWatch](#cloudwatch/README.md)
-- [S#](#s3/README.md)
-- [RDS](#rds/README.md)
-- [DynamoDB](#dynamo/README.md)
+Terraform module which creates vpc end points for the resources outside of the vpc to interact with the resources inside the VPC.
 
 ## Requirements
 
@@ -31,6 +21,26 @@ Creates aws resources using terraform modules.
 | Creation | `terraform apply`              |
 | Update   | `terraform apply`              |
 | Deletion | `terraform destroy`            |
+
+## Usage
+
+```
+module "vpc_s3_endpoint" {
+  source = "./vpc_endpoint"
+
+  vpc_id       = aws_vpc.default_vpc.id
+  service_name = "com.amazonaws.us-east-1.s3"
+  env          = "PROD"
+}
+```
+
+## Inputs
+
+```
+vpc_id                  string
+service_name            string
+env                     string
+```
 
 **NOTE : `terraform.tfvars` file should be created and the above used variables should be initialized it the file.**
 
