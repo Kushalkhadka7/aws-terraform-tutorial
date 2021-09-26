@@ -48,7 +48,7 @@ Terraform module which creates Virtual Private Cloud (VPC).
 
 ## Usage
 
-```hcl
+```
 module "aws_vpc" {
   source                           = "./vpc"
   vpc_cidr                         = var.vpc_cidr
