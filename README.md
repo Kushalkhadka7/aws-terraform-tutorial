@@ -11,6 +11,8 @@ Creates aws resources using terraform modules.
 - [S#](#s3/README.md)
 - [RDS](#rds/README.md)
 - [DynamoDB](#dynamo/README.md)
+- [SecurityGroups]
+- [TargetGroups]
 
 ## Requirements
 
